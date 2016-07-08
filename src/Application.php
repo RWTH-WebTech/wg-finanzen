@@ -33,9 +33,11 @@ class Application{
     }
 
     public function run(){
-        $pageId = $_GET[self::PAGE_PARAMETER];
+        $pageId = array_keys($this->pages)[0];
+        if(isset($_GET[self::PAGE_PARAMETER])){
+            $pageId = $_GET[self::PAGE_PARAMETER];
+        }
         /* @var PageInterface $page */
-        $page = array_shift(array_values($this->pages));
         if(isset($this->pages[$pageId])){
             $page = $this->pages[$pageId];
         }
@@ -45,6 +47,6 @@ class Application{
             'activePageId' => $pageId,
             'navigation' => $this->navigation
         );
-        $this->renderer->showViewScript(__DIR__.'/../view/', $variables);
+        $this->renderer->showViewScript(__DIR__.'/../view/layout.phtml', $variables);
     }
 }
