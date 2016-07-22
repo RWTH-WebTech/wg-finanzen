@@ -1,0 +1,26 @@
+<?php if($variables['created']) { ?>
+    <div class="alert alert-success">Mitbewohner hinzugefügt</div>
+<?php } ?>
+
+<form class="form-horizontal" method="post" action="">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Neuer Mitbewohner</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="name">Name</label>
+            <div class="col-md-10">
+                <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md" required="">
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-6">
+                <input class="btn btn-primary btn-block" type="submit" value="Mitbewohner hinzufügen">
+            </div>
+        </div>
+    </fieldset>
+</form>

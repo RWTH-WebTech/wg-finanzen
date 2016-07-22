@@ -1,5 +1,5 @@
 <?php
-namespace WGFinanzen\Entity;
+namespace WGFinanzen\Data;
 
 
 class FlatMate {

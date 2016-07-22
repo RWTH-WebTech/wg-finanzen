@@ -3,6 +3,7 @@ namespace WGFinanzen;
 
 require_once(__DIR__.'/Page/PageInterface.php');
 require_once(__DIR__.'/Renderer.php');
+require_once(__DIR__.'/Data.php');
 require_once(__DIR__.'/NavigationItem.php');
 
 use WGFinanzen\Page\PageInterface;
@@ -18,8 +19,11 @@ class Application{
 
     protected $navigation;
 
+    protected $data;
+
     public function __construct($pages = [], $navigation = []){
         $this->renderer = new Renderer();
+        $this->data = new Data();
         $this->pages = $pages;
         $this->navigation = $navigation;
     }
@@ -32,15 +36,17 @@ class Application{
         $this->navigation[] = $item;
     }
 
+    public function getData(){
+        return $this->data;
+    }
+
     public function run(){
         $pageId = array_keys($this->pages)[0];
-        if(isset($_GET[self::PAGE_PARAMETER])){
+        if(isset($_GET[self::PAGE_PARAMETER]) && isset($this->pages[$pageId])){
             $pageId = $_GET[self::PAGE_PARAMETER];
         }
         /* @var PageInterface $page */
-        if(isset($this->pages[$pageId])){
-            $page = $this->pages[$pageId];
-        }
+        $page = $this->pages[$pageId];
         $variables = array(
             'pageTitle' => $page->getTitle(),
             'pageContent' => $this->renderer->render($page),

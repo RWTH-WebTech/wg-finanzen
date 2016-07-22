@@ -1,0 +1,32 @@
+<?php /* @var $this \WGFinanzen\Page\ShowPurchases */ ?>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Datum</th>
+        <th>Titel</th>
+        <th>Preis</th>
+        <th>Käufer</th>
+        <th class="hidden-xs">Beschreibung</th>
+        <th>Für</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($this->getData()->getKaeufe() as $purchase){ /* @var $purchase \WGFinanzen\Entity\Purchase */ ?>
+        <tr>
+            <td><?= $purchase->getDate()->format('d.m.Y'); ?></td>
+            <td><?= $purchase->getTitle() ?></td>
+            <td><?= $purchase->getCost() ?>&euro;</td>
+            <td><?= $purchase->getBoughtBy()->getName() ?></td>
+            <td class="hidden-xs"><?= $purchase->getDescription() ?></td>
+            <td><?php
+                $namen = [];
+                foreach($purchase->getBoughtFor() as $flatMate) {  /* @var $flatMate \WGFinanzen\Entity\FlatMate */
+                    $names[] = $flatMate->getName();
+                }
+                echo implode(', ', $names);
+                ?>
+            </td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
