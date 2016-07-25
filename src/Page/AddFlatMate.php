@@ -9,12 +9,19 @@ use WGFinanzen\Data;
 use WGFinanzen\Data\FlatMate;
 
 class AddFlatMate implements PageInterface{
+
+    /** @var  Data */
     protected $data;
 
-    public function __construct(Data $data){
+    function __construct(Data $data)
+    {
         $this->data = $data;
     }
 
+    public function getData()
+    {
+        return $this->data;
+    }
 
     public function getTitle()
     {
@@ -39,7 +46,7 @@ class AddFlatMate implements PageInterface{
             $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
             $flatMate = new FlatMate();
             $flatMate->setName($name);
-            $this->data->addFlatMate($flatMate);
+            $this->getData()->addFlatMate($flatMate);
             return true;
         }
         return false;

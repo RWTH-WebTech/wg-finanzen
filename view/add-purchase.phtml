@@ -1,0 +1,59 @@
+<?php if($variables['created']) { ?>
+    <div class="alert alert-success">Kauf hinzugefügt</div>
+<?php } ?>
+
+<form class="form-horizontal" method="post" action="">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Neuer Kauf</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="title">Titel</label>
+            <div><input id="title" name="title" type="text" placeholder="Titel" class="form-control input-md" required=""></div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="description">Beschreibung</label>
+            <div><textarea class="form-control" id="description" name="description" placeholder="2kg Kartoffeln, 2l Milch, Joghurt"></textarea></div>
+        </div>
+
+        <!-- Appended Input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="cost">Preis</label>
+            <div><input id="cost" name="cost" class="form-control" placeholder="0.00" type="number" step="0.01" required=""></div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="date">Datum</label>
+            <div><input id="date" name="date" type="datetime-local" value="<?= (new DateTime())->format('Y-m-d\TH:i'); ?>" class="form-control input-md" required=""></div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="boughtBy">Käufer</label>
+            <div><select id="boughtBy" name="boughtBy" class="form-control">
+                    <?php foreach($variables['flatMates'] as $flatMate) { ?>
+                        <option value="<?= $flatMate->getId(); ?>"><?= $flatMate->getName(); ?></option>
+                    <?php } ?>
+            </select></div>
+        </div>
+
+        <!-- Select Multiple -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="boughtFor">Gekauft Für</label>
+            <div><select id="boughtFor" name="boughtFor[]" class="form-control" multiple="multiple">
+                    <?php foreach($variables['flatMates'] as $flatMate) { ?>
+                        <option value="<?= $flatMate->getId(); ?>"><?= $flatMate->getName(); ?></option>
+                    <?php } ?>
+            </select></div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <div><input class="btn btn-primary btn-block" type="submit" value="Kauf Speichern"></div>
+        </div>
+    </fieldset>
+</form>

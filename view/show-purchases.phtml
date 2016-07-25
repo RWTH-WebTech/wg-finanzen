@@ -1,4 +1,10 @@
-<?php /* @var $this \WGFinanzen\Page\ShowPurchases */ ?>
+<?php if($variables['removed'] === 1) { ?>
+    <div class="alert alert-success">Kauf gelöscht</div>
+<?php } elseif($variables['removed'] === 0) { ?>
+    <div class="alert alert-warning">Kauf nicht gefunden</div>
+<?php } ?>
+
+
 <table class="table">
     <thead>
     <tr>
@@ -8,23 +14,30 @@
         <th>Käufer</th>
         <th class="hidden-xs">Beschreibung</th>
         <th>Für</th>
+        <th class="text-center">Löschen</th>
     </tr>
     </thead>
     <tbody>
-    <?php foreach($this->getData()->getKaeufe() as $purchase){ /* @var $purchase \WGFinanzen\Entity\Purchase */ ?>
+    <?php foreach($variables['purchases'] as $purchase){ /* @var $purchase \WGFinanzen\Data\Purchase */ ?>
         <tr>
             <td><?= $purchase->getDate()->format('d.m.Y'); ?></td>
             <td><?= $purchase->getTitle() ?></td>
-            <td><?= $purchase->getCost() ?>&euro;</td>
+            <td><?php printf('%01.2f', $purchase->getCost()); ?>&euro;</td>
             <td><?= $purchase->getBoughtBy()->getName() ?></td>
             <td class="hidden-xs"><?= $purchase->getDescription() ?></td>
             <td><?php
-                $namen = [];
-                foreach($purchase->getBoughtFor() as $flatMate) {  /* @var $flatMate \WGFinanzen\Entity\FlatMate */
+                $names = [];
+                foreach($purchase->getBoughtFor() as $flatMate) {  /* @var $flatMate \WGFinanzen\Data\FlatMate */
                     $names[] = $flatMate->getName();
                 }
                 echo implode(', ', $names);
                 ?>
+            </td>
+            <td class="text-center">
+                <form method="post" action="">
+                    <input type="hidden" name="id" value="<?= $purchase->getId() ?>">
+                    <button class="btn btn-xs btn-default" type="submit" title="Löschen"><i class="glyphicon glyphicon-remove"></i></button>
+                </form>
             </td>
         </tr>
     <?php } ?>

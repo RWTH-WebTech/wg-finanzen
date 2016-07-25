@@ -11,16 +11,15 @@ class ShowPurchases implements PageInterface {
     /** @var  Data */
     protected $data;
 
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function setData($data)
+    function __construct($data)
     {
         $this->data = $data;
     }
 
+    public function getData()
+    {
+        return $this->data;
+    }
 
     public function getTitle()
     {
@@ -34,8 +33,22 @@ class ShowPurchases implements PageInterface {
 
     public function getViewVariables()
     {
+        $removed = $this->deletePurchase();
         return [
-            'purchases' => $this->data->getPurchases(),
+            'removed' => $removed,
+            'purchases' => $this->data->getAllPurchases()
         ];
+    }
+
+    public function deletePurchase(){
+        if(!empty($_POST['id'])){
+            $purchase = $this->getData()->getPurchase((int) $_POST['id']);
+            if($purchase == null){
+                return 0;
+            }
+            $this->getData()->removePurchase((int) $_POST['id']);
+            return 1;
+        }
+        return -1;
     }
 }

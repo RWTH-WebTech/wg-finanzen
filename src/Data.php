@@ -164,4 +164,8 @@ class Data {
     public function getAllPurchases(){
         return $this->purchases;
     }
+
+    public static function escapeXSS($str){
+        return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+    }
 }

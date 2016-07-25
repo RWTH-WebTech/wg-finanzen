@@ -11,6 +11,7 @@ use WGFinanzen\Page\PageInterface;
 class Application{
 
     const PAGE_PARAMETER = 'page';
+    const NOSTRAP = false;
 
     /** @var Renderer  */
     protected $renderer;
@@ -53,6 +54,6 @@ class Application{
             'activePageId' => $pageId,
             'navigation' => $this->navigation
         );
-        $this->renderer->showViewScript(__DIR__.'/../view/layout.phtml', $variables);
+        $this->renderer->showViewScript(self::NOSTRAP ? __DIR__.'/../view/nostrap.phtml' : __DIR__.'/../view/layout.phtml', $variables);
     }
 }

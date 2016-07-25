@@ -1,0 +1,16 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Mitbewohner</th>
+        <th>Bilanz</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($variables['flatMates'] as $flatMate) { /* @var $flatMate \WGFinanzen\Data\FlatMate */ ?>
+        <tr>
+            <td><?= $flatMate->getName() ?></td>
+            <td><?= printf('%01.1f', $variables['balances'][$flatMate->getId()]); ?> &euro;</td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
