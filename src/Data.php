@@ -22,51 +22,19 @@ class Data {
     protected $db;
 
     function __construct(){
-        $this->db = new PDO(self::DATABASE_FILE);
+        $this->db = new PDO('sqlite:'.self::DATABASE_FILE);
         $this->readFlatMates();
         $this->readPurchases();
     }
 
-    protected function saveFlatMates(){
-        $fp = fopen(self::FLAT_MATE_DATA, 'w');
-        foreach($this->flatMates as $flatMate){
-            fputcsv($fp, [
-                $flatMate->getId(),
-                $flatMate->getName()]
-            );
-        }
-        fclose($fp);
-    }
-
-    protected function savePurchases(){
-        $fp = fopen(self::PURCHASE_DATA, 'w');
-        foreach($this->purchases as $purchase){
-            $boughtForIds = [];
-            foreach($purchase->getBoughtFor() as $flatMate){
-                $boughtForIds[] = $flatMate->getId();
-            }
-            fputcsv($fp, [
-                $purchase->getId(),
-                $purchase->getTitle(),
-                $purchase->getDescription(),
-                $purchase->getCost(),
-                $purchase->getDate()->format(self::DATE_FORMAT),
-                $purchase->getBoughtBy()->getId(),
-                json_encode($boughtForIds)
-            ]);
-        }
-        fclose($fp);
-    }
-
     protected function readFlatMates(){
-        $flatMates = $this->db->query('SELECT * FROM flatmates');
+        $flatMates = $this->db->query('SELECT * FROM flatmate');
         while($flatMateData = $flatMates->fetch()){
             $flatMate = new FlatMate();
             $flatMate->setId((int) $flatMateData['id']);
             $flatMate->setName($flatMateData['name']);
             $this->flatMates[] = $flatMate;
         }
-        $flatMates->closeCursor();
     }
 
     protected function readPurchases(){
@@ -89,7 +57,7 @@ class Data {
             $stmt->execute();
             $boughtFor = [];
             while($purchasedForData = $stmt->fetch()) {
-                $boughtFor[] = $this->getFlatMate($purchaseData['flatmate_id']);
+                $boughtFor[] = $this->getFlatMate($purchasedForData['flatmate_id']);
             }
             $purchase->setBoughtFor($boughtFor);
         }
@@ -106,7 +74,7 @@ class Data {
     }
 
     public function addFlatMate(FlatMate $flatMate){
-        $stmt = $this->db->prepare('INSERT INTO flatmates (name) VALUES (:name)');
+        $stmt = $this->db->prepare('INSERT INTO flatmate (name) VALUES (:name)');
         $stmt->bindParam(':name', $name);
         $name = $flatMate->getName();
         $result = $stmt->execute();
@@ -118,7 +86,7 @@ class Data {
     }
 
     public function removeFlatMate($id){
-        $stmt = $this->db->prepare('DELETE FROM flatmates WHERE id = :id');
+        $stmt = $this->db->prepare('DELETE FROM flatmate WHERE id = :id');
         $stmt->bindParam(':id', $flatMateId);
         $flatMateId = $id;
         $result = $stmt->execute();
@@ -147,7 +115,7 @@ class Data {
     }
 
     public function addPurchase(Purchase $purchase){
-        $stmt = $this->db->prepare('INSERT INTO purchases (title, description, date, cost, purchased_by) VALUES (:title, :description, :date, :cost, :purchased_by)');
+        $stmt = $this->db->prepare('INSERT INTO purchase (title, description, date, cost, purchased_by) VALUES (:title, :description, :date, :cost, :purchased_by)');
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':date', $date);
@@ -181,7 +149,7 @@ class Data {
     }
 
     public function removePurchase($id){
-        $stmt = $this->db->prepare('DELETE FROM purchases WHERE id = :id');
+        $stmt = $this->db->prepare('DELETE FROM purchase WHERE id = :id');
         $stmt->bindParam(':id', $purchaseId);
         $purchaseId = $id;
         $result = $stmt->execute();
