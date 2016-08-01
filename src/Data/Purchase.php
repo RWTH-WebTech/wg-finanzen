@@ -1,6 +1,7 @@
 <?php
 namespace WGFinanzen\Data;
 
+use DateTime;
 class Purchase{
     /** @var int */
     protected $id;
