@@ -44,8 +44,14 @@ class AddFlatMate implements PageInterface{
     protected function createFlatMate(){
         if(!empty($_POST['name'])){
             $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
+            $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
+            $passwordVerify = htmlspecialchars($_POST['password_verify'], ENT_QUOTES, 'UTF-8');
+            if($password != $passwordVerify){
+                return false;
+            }
             $flatMate = new FlatMate();
             $flatMate->setName($name);
+            $flatMate->setPassword(password_hash($password, PASSWORD_DEFAULT));
             $this->getData()->addFlatMate($flatMate);
             return true;
         }

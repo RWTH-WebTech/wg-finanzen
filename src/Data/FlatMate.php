@@ -7,6 +7,8 @@ class FlatMate {
     protected $id;
     /** @var  string */
     protected $name;
+    /** @var  string */
+    protected $password;
 
     /**
      * @return int
@@ -38,5 +40,21 @@ class FlatMate {
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 }

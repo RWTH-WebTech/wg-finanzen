@@ -5,7 +5,8 @@ $pdo->exec("DROP TABLE IF EXISTS purchase");
 $pdo->exec("DROP TABLE IF EXISTS purchased_for");
 $pdo->exec("CREATE TABLE IF NOT EXISTS flatmate (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	name TEXT
+	name TEXT UNIQUE,
+	password TEXT
 )");
 $pdo->exec("CREATE TABLE IF NOT EXISTS purchase (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,10 +21,11 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS purchased_for (
 	flatmate_id INTEGER,
 	PRIMARY KEY (purchase_id, flatmate_id)
 )");
-$pdo->exec("INSERT INTO flatmate (id, name) VALUES
-(1, 'Alice'),
-(2, 'Bob'),
-(3, 'Eve')");
+// Passwort jeweils der Name in Kleinbuchstaben
+$pdo->exec('INSERT INTO flatmate (id, name, password) VALUES
+(1, "Alice", "$2y$10$4VqgmdhxdTruNtmxWDR4Je/iDHHpbOiccLIjBQku6voaUuuGBxgsy"),
+(2, "Bob", "$2y$10$HU4BleAp1EBTAHX1T.qm8uvY4gfg2yGOauouyhM1lFtUiKWl3W/Km"),
+(3, "Eve", "$2y$10$dnvbtog3859eLzx1EkoNp.kGz9MihFRchiyCQEW9zdXidu5QbHjPG")');
 $pdo->exec("INSERT INTO purchase (id, title, description, date, cost, purchased_by) VALUES 
 (1, 'Bäcker', '5 Brötchen, 3 Croissants', '2016-07-05 12:00:00', 4.3, 1),
 (2, 'Supermarkt', 'Milch, Joghurt', '2016-07-05 12:30:00', 2.19, 1),
