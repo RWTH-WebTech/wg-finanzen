@@ -1,9 +1,12 @@
 <?php
 namespace WGFinanzen\Page;
 
-require_once(__DIR__ .'/PageInterface.php');
+require_once(__DIR__ .'/ProtectedPageInterface.php');
+require_once(__DIR__.'/../Data/FlatMate.php');
 
-class Example implements PageInterface {
+use WGFinanzen\Data\FlatMate;
+
+class Example implements ProtectedPageInterface {
     public function getTitle() {
         return 'Hallo Welt';
     }
@@ -14,5 +17,15 @@ class Example implements PageInterface {
 
     public function getViewVariables() {
         return ['name' => 'Alice'];
+    }
+
+    /**
+     * Returns true if the passed FlatMate is allowed to access the page. If null is passed, no FlatMate is logged in.
+     * @param FlatMate $flatMate
+     * @return boolean
+     */
+    public function accessAllowed(FlatMate $flatMate = null)
+    {
+        return $flatMate !== null;
     }
 }

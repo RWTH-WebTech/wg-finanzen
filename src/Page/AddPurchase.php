@@ -1,15 +1,17 @@
 <?php
 namespace WGFinanzen\Page;
 
-require_once(__DIR__.'/PageInterface.php');
+require_once(__DIR__ .'/ProtectedPageInterface.php');
 require_once(__DIR__.'/../Data.php');
 require_once(__DIR__.'/../Data/Purchase.php');
+require_once(__DIR__.'/../Data/FlatMate.php');
 
 use WGFinanzen\Data;
 use WGFinanzen\Data\Purchase;
+use WGFinanzen\Data\FlatMate;
 use DateTime;
 
-class AddPurchase implements PageInterface{
+class AddPurchase implements ProtectedPageInterface{
 
     /** @var  Data */
     protected $data;
@@ -73,5 +75,15 @@ class AddPurchase implements PageInterface{
         $purchase->setBoughtFor($boughtFor);
         $this->getData()->addPurchase($purchase);
         return true;
+    }
+
+    /**
+     * Returns true if the passed FlatMate is allowed to access the page. If null is passed, no FlatMate is logged in.
+     * @param FlatMate $flatMate
+     * @return boolean
+     */
+    public function accessAllowed(FlatMate $flatMate = null)
+    {
+        return $flatMate !== null;
     }
 }

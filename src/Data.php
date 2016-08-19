@@ -33,6 +33,7 @@ class Data {
             $flatMate = new FlatMate();
             $flatMate->setId((int) $flatMateData['id']);
             $flatMate->setName($flatMateData['name']);
+            $flatMate->setPassword($flatMateData['password']);
             $this->flatMates[] = $flatMate;
         }
     }
@@ -104,6 +105,15 @@ class Data {
     public function getFlatMate($id){
         foreach($this->flatMates as $key => $mate){
             if($mate->getId() == $id){
+                return $mate;
+            }
+        }
+        return null;
+    }
+
+    public function getFlatMateByName($name){
+        foreach($this->flatMates as $key => $mate){
+            if($mate->getName() == $name){
                 return $mate;
             }
         }
