@@ -1,8 +1,6 @@
 <?php
 namespace WGFinanzen;
 
-require_once(__DIR__.'/Application.php');
-
 class NavigationItem{
     /** @var  string */
     protected $name;

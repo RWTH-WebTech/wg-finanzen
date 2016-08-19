@@ -1,9 +1,6 @@
 <?php
 namespace WGFinanzen;
 
-require_once(__DIR__.'/Data/FlatMate.php');
-require_once(__DIR__.'/Data/Purchase.php');
-
 use WGFinanzen\Data\Purchase;
 use WGFinanzen\Data\FlatMate;
 use DateTime;

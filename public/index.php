@@ -1,13 +1,5 @@
 <?php
-require_once(__DIR__.'/../src/Application.php');
-require_once(__DIR__.'/../src/NavigationItem.php');
-require_once(__DIR__.'/../src/Page/Login.php');
-require_once(__DIR__.'/../src/Page/Logout.php');
-require_once(__DIR__.'/../src/Page/Example.php');
-require_once(__DIR__.'/../src/Page/AddFlatMate.php');
-require_once(__DIR__.'/../src/Page/AddPurchase.php');
-require_once(__DIR__.'/../src/Page/ShowPurchases.php');
-require_once(__DIR__.'/../src/Page/Balances.php');
+require_once(__DIR__.'/../init_autoloader.php');
 
 $app = new \WGFinanzen\Application();
 

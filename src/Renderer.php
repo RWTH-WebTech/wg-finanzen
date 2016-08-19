@@ -1,8 +1,6 @@
 <?php
 namespace WGFinanzen;
 
-require_once(__DIR__.'/Page/PageInterface.php');
-
 use WGFinanzen\Page\PageInterface;
 
 

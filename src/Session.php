@@ -1,9 +1,6 @@
 <?php
 namespace WGFinanzen;
 
-require_once(__DIR__.'/Data.php');
-require_once(__DIR__.'/Data/FlatMate.php');
-
 use WGFinanzen\Data\FlatMate;
 
 class Session {

@@ -1,13 +1,6 @@
 <?php
 namespace WGFinanzen;
 
-require_once(__DIR__.'/Page/PageInterface.php');
-require_once(__DIR__.'/Page/ProtectedPageInterface.php');
-require_once(__DIR__.'/Renderer.php');
-require_once(__DIR__.'/Data.php');
-require_once(__DIR__.'/NavigationItem.php');
-require_once(__DIR__.'/Session.php');
-
 use WGFinanzen\Page\PageInterface;
 use WGFinanzen\Page\ProtectedPageInterface;
 

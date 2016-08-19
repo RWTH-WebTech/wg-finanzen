@@ -1,10 +1,9 @@
 <?php
 namespace WGFinanzen\Page;
-require_once(__DIR__ .'/ProtectedPageInterface.php');
-require_once(__DIR__ .'/../Session.php');
-// require, use Session
+
 use WGFinanzen\Data\FlatMate;
 use WGFinanzen\Session;
+
 class Login implements ProtectedPageInterface{
     protected $sessionManager;
 

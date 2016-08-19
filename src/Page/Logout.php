@@ -1,7 +1,5 @@
 <?php
 namespace WGFinanzen\Page;
-require_once(__DIR__ .'/ProtectedPageInterface.php');
-require_once(__DIR__ .'/../Session.php');
 
 use WGFinanzen\Data\FlatMate;
 use WGFinanzen\Session;

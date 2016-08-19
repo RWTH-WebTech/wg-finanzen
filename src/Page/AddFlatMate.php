@@ -1,10 +1,6 @@
 <?php
 namespace WGFinanzen\Page;
 
-require_once(__DIR__ .'/ProtectedPageInterface.php');
-require_once(__DIR__ .'/../Data.php');
-require_once(__DIR__ .'/../Data/FlatMate.php');
-
 use WGFinanzen\Data;
 use WGFinanzen\Data\FlatMate;
 
