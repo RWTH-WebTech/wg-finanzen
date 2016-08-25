@@ -1,5 +1,8 @@
 <?php if($variables['created']) { ?>
     <div class="alert alert-success">Mitbewohner hinzugefügt</div>
+    <?php if(!empty($variables['password'])) { ?>
+        <div class="alert alert-success">Generiertes Passwort: <?= $variables['password'] ?></div>
+    <?php } ?>
 <?php } ?>
 
 <form class="form-horizontal" method="post" action="">
@@ -18,7 +21,7 @@
 
         <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-2 control-label" for="name">Passwort</label>
+            <label class="col-md-2 control-label" for="name">Passwort (leer lassen für Generierung)</label>
             <div class="col-md-10">
                 <input id="name" name="password" type="password" placeholder="Name" class="form-control input-md" required="">
             </div>

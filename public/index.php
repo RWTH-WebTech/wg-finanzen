@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__.'/../init_autoloader.php');
+require_once(__DIR__.'/../vendor/autoload.php');
 
 $app = new \WGFinanzen\Application();
 

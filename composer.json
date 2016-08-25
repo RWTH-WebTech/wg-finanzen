@@ -1,0 +1,16 @@
+{
+  "name": "xelax90/wg-finanzen",
+  "description": "Finanzmanageent für eine WG",
+  "license": "CC-BY-SA-4.0",
+  "authors": [
+    {"name": "Aleksandr Grinspun", "email": "aleksandr.grinspun@rwth-aachen.de" }
+  ],
+  "autoload": {
+    "psr-4": {
+      "WGFinanzen\\": "src/"
+    }
+  },
+  "require": {
+    "hackzilla/password-generator" : "*"
+  }
+}
