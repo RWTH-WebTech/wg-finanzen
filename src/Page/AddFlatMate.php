@@ -17,6 +17,7 @@ class AddFlatMate implements ProtectedPageInterface{
         $this->data = $data;
         $this->generator = new HumanPasswordGenerator();
         $this->generator->setWordList('/usr/share/dict/words');
+        $this->generator->setParameter(HumanPasswordGenerator::PARAMETER_WORD_SEPARATOR, '-');
     }
 
     public function getData()
