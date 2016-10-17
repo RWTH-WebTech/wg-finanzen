@@ -1,0 +1,11 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <?php foreach ($variables['navigation'] as $navigationItem) { ?>
+                    <li class="<?= $variables['activePageId'] == $navigationItem->getPageId() ? 'active' : '' ?>"><a href="<?= $navigationItem->getLink() ?>"><?= $navigationItem->getName() ?></a></li>
+                <?php } ?>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
