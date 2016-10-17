@@ -84,6 +84,7 @@ class Data {
         }
         $flatMate->setId($this->db->lastInsertId());
         $this->flatMates[] = $flatMate;
+				return true;
     }
 
     public function removeFlatMate($id){
