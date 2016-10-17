@@ -19,6 +19,7 @@ $showPurchases = new \WGFinanzen\Page\ShowPurchases($app->getData());
 $showPurchasesNavigation = new \WGFinanzen\NavigationItem('Käufe', 'showPurchases');
 $showBalances = new \WGFinanzen\Page\Balances($app->getData());
 $showBalancesNavigation = new \WGFinanzen\NavigationItem('Bilanzen', 'balances');
+$readShoppingList = new \WGFinanzen\Page\ReadShoppingList($app->getData());
 
 
 $app->addPage('example', $examplePage);
@@ -28,6 +29,7 @@ $app->addPage('showPurchases', $showPurchases);
 $app->addPage('balances', $showBalances);
 $app->addPage('login', $login);
 $app->addPage('logout', $logout);
+$app->addPage('readShoppingList', $readShoppingList);
 $app->addNavigationItem($loginNavigation);
 $app->addNavigationItem($logoutNavigation);
 $app->addNavigationItem($exampleNavigation);

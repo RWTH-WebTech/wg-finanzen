@@ -5,8 +5,10 @@ use WGFinanzen\Page\PageInterface;
 use WGFinanzen\Page\ProtectedPageInterface;
 
 class Application{
+    public static $DISABLE_LAYOUT = false;
 
     const PAGE_PARAMETER = 'page';
+    const NO_LAYOUT_VARIABLE = '__NO_LAYOUT__';
     const NOSTRAP = false;
 
     /** @var Renderer  */
@@ -56,6 +58,10 @@ class Application{
             $pageId = $_GET[self::PAGE_PARAMETER];
         }
         $variables = $this->getPageVariables($pageId);
+        if(self::$DISABLE_LAYOUT){
+            echo $variables['pageContent'];
+            return;
+        }
         $this->renderer->showViewScript(self::NOSTRAP ? __DIR__.'/../view/nostrap.phtml' : __DIR__.'/../view/layout.phtml', $variables);
     }
 
