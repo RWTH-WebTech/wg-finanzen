@@ -4,6 +4,7 @@ namespace WGFinanzen\Page;
 use WGFinanzen\Application;
 use WGFinanzen\Data\Purchase;
 use WGFinanzen\Data;
+use DateTime;
 
 class ReadShoppingList implements PageInterface{
 
@@ -33,7 +34,7 @@ class ReadShoppingList implements PageInterface{
     public function getViewVariables()
     {
         Application::$DISABLE_LAYOUT = true;
-        $headings = ['title', 'description', 'cost', 'date', 'boughtBy', 'boughtFor'];
+        $headings = [ 'date', 'title', 'cost','boughtBy', 'description', 'boughtFor'];
         $fp = fopen("php://input", 'r');
         $success = true;
         $errors = [];
@@ -59,13 +60,14 @@ class ReadShoppingList implements PageInterface{
         if(DateTime::getLastErrors()['error_count'] != 0){
             return false;
         }
-        $boughtBy = $this->getData()->getFlatMate((int) $data['boughtBy']);
+        $boughtBy = $this->getData()->getFlatMateByName((int) $data['boughtBy']);
         if($boughtBy === null){
             return false;
         }
         $boughtFor = [];
-        foreach($data['boughtFor'] as $flatMateId){
-            $flatMate = $this->getData()->getFlatMate($flatMateId);
+        $dataBoughtFor = explode(',', $data['boughtFor']);
+        foreach($dataBoughtFor as $flatMateName){
+            $flatMate = $this->getData()->getFlatMateByName($flatMateName);
             if($flatMate === null){
                 return false;
             }
